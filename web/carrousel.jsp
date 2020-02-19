@@ -4,6 +4,7 @@
     Author     : Sergio
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,15 +23,17 @@
 
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="carrousel/location_img-59-2159281706-88.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="carrousel/74.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="carrousel/nueva-york.jpg" class="d-block w-100" alt="...">
-                </div>
+                <% ArrayList<String> imagenes = (ArrayList<String>) request.getAttribute("imagenes");
+                    for (int i = 0; i < imagenes.size(); i++) { %>
+                    <%String activo = "";
+                    if(i == 0) {
+                        activo = "active";
+                    }
+                    %>    
+                    <div class="carousel-item <%= activo %>">
+                        <img src="carrousel/<%= imagenes.get(i) %>" class="d-block w-100" alt="...">
+                    </div>
+                <%}%>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
